@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="0; url=com.white.app://login?token_hash={{ .TokenHash }}&type={{ .Type }}" />
-  <title>Redirecting...</title>
-</head>
-<body>
-  <p>Redirecting to White App...</p>
-  <script>
-    // fallback في حال لم يشتغل meta refresh (بعض الأجهزة القديمة)
-    window.location.href = "com.white.app://login?token_hash={{ .TokenHash }}&type={{ .Type }}";
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting...</title>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get('token');
+      // حوّل مباشرة لتطبيقك
+      window.location.href = `com.white.app://login?token=${token}`;
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to app...</p>
+  </body>
 </html>
