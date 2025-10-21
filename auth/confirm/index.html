@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting...</title>
+    <script>
+      window.onload = () => {
+        const params = new URLSearchParams(window.location.search);
+        const token_hash = params.get('token_hash');
+        const type = params.get('type');
+
+        if (token_hash && type) {
+          // التوجيه للتطبيق
+          setTimeout(() => {
+            window.location.href = `com.white.app://login?token_hash=${token_hash}&type=${type}`;
+          }, 500);
+
+          // التوجيه الاحتياطي لمتجر التطبيقات
+          setTimeout(() => {
+            window.location.href =
+              "https://play.google.com/store/apps/details?id=com.white.app";
+          }, 2000);
+        } else {
+          document.body.innerHTML = "<p>Invalid or missing token.</p>";
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to app...</p>
+  </body>
+</html>
