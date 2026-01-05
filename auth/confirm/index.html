@@ -1,32 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Redirecting...</title>
-    <script>
-      window.onload = () => {
-        const params = new URLSearchParams(window.location.search);
-        const token_hash = params.get('token_hash');
-        const type = params.get('type');
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>جاري التوجيه...</title>
+  <script>
+    window.onload = () => {
+      const params = new URLSearchParams(window.location.search);
+      const token_hash = params.get('token_hash');
+      const type = params.get('type');
 
-        if (token_hash && type) {
-          // التوجيه للتطبيق
-          setTimeout(() => {
-            window.location.href = `com.whiteapp.laundry://login?token_hash=${token_hash}&type=${type}`;
-          }, 500);
+      if (token_hash && type) {
+        const deepLink = `com.whiteapp.laundry://login?token_hash=${token_hash}&type=${type}`;
 
-          // التوجيه الاحتياطي لمتجر التطبيقات
-          setTimeout(() => {
-            window.location.href =
-              "https://play.google.com/store/apps/details?id=com.whiteapp.laundry";
-          }, 2000);
-        } else {
-          document.body.innerHTML = "<p>Invalid or missing token.</p>";
-        }
-      };
-    </script>
-  </head>
-  <body>
-    <p>Redirecting to app...</p>
-  </body>
+        // محاولة فورية
+        window.location.href = deepLink;
+
+        // محاولة احتياطية بعد 1.5 ثانية (لو الجهاز بطيء)
+        setTimeout(() => {
+          window.location.href = deepLink;
+        }, 1500);
+
+        // fallback آمن بعد وقت طويل (مش تلقائي للـ Play Store)
+        setTimeout(() => {
+          document.body.innerHTML = '<p style="text-align:center; padding:20px;">يرجى فتح التطبيق يدويًا إذا لم يُفتح تلقائيًا.</p>';
+        }, 8000);
+      } else {
+        document.body.innerHTML = '<p style="text-align:center; padding:20px;">الرابط غير صالح أو ناقص.</p>';
+      }
+    };
+  </script>
+</head>
+<body style="font-family: sans-serif; text-align:center; padding:50px;">
+  <p>جاري التوجيه إلى التطبيق...</p>
+</body>
 </html>
