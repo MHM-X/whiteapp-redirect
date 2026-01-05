@@ -1,32 +1,24 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Redirecting...</title>
     <script>
-      window.onload = () => {
-        const params = new URLSearchParams(window.location.search);
-        const token_hash = params.get('token_hash');
-        const type = params.get('type');
+      // نقرأ القيم من الرابط القادم من Supabase
+      const params = new URLSearchParams(window.location.search);
+      const token_hash = params.get('token_hash');
+      const type = params.get('type');
 
-        if (token_hash && type) {
-          // التوجيه للتطبيق
-          setTimeout(() => {
-            window.location.href = `com.whiteapp.laundry://login?token_hash=${token_hash}&type=${type}`;
-          }, 10000);
-
-          // التوجيه الاحتياطي لمتجر التطبيقات
-          setTimeout(() => {
-            window.location.href =
-              "https://play.google.com/store/apps/details?id=com.whiteapp.laundry";
-          }, 20000);
-        } else {
-          document.body.innerHTML = "<p>Invalid or missing token.</p>";
-        }
-      };
+      // نعيد التوجيه لتطبيقك (custom scheme)
+      if (token_hash && type) {
+        window.location.href = `com.whiteapp.laundry://login?token_hash=${token_hash}&type=${type}`;
+      } else {
+        document.body.innerHTML = "<p>Invalid or missing token.</p>";
+      }
     </script>
   </head>
   <body>
-    <p>Redirecting to app...</p>
+    <p>Redirecting ننننننننننننننننننننننننننننننننننننننننننننننننto app...</p>
   </body>
 </html>
