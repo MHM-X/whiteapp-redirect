@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.whiteapp.laundry",
+      "sha256_cert_fingerprints": [
+        "F3:33:55:8B:05:39:1E:DA:17:C4:63:A1:4D:66:FA:E9:F8:E1:24:99:1D:42:E0:CC:73:04:A0:9A:44:61:EE:55"
+      ]
+    }
+  }
+]
